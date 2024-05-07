@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "eventos")
+@Table(name = "eventos2")
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
