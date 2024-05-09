@@ -1,6 +1,5 @@
 package com.softtek.BitFest.controlador;
 
-import com.softtek.BitFest.modelo.Categoria;
 import com.softtek.BitFest.modelo.Comentario;
 import com.softtek.BitFest.servicio.IComentarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
