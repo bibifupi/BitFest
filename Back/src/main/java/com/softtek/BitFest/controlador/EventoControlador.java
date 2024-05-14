@@ -3,6 +3,8 @@ package com.softtek.BitFest.controlador;
 import com.softtek.BitFest.modelo.Evento;
 import com.softtek.BitFest.servicio.IEventoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,8 @@ public class EventoControlador {
         return eventoService.consultarUno(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("/portitulo")
+    public ResponseEntity<List<Evento>>findByTituloLike(@RequestParam String titulo){ return new ResponseEntity<List<Evento>> (eventoService.findByTituloLike(titulo), HttpStatus.OK);};
 
     @PostMapping
     public Evento createEvento(@RequestBody Evento evento) {

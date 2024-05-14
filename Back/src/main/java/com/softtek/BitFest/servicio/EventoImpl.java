@@ -31,7 +31,7 @@ public class EventoImpl extends CRUDImpl<Evento, Integer> implements IEventoServ
     }
 
     @Override
-    public List<Organizador> consultaEventoPorOrganizador(String nombre) {
+    public List<Evento> consultaEventoPorOrganizador(String nombre) {
         return eventRepo.consultaEventoPorOrganizador(nombre);
     }
 }
