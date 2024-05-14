@@ -32,8 +32,6 @@ public class Evento {
     @Column(length = 60, nullable = false)
     private String estado;
 
-    @OneToMany(mappedBy = "evento")
-    private List<Imagen> imagenes;
 
     @ManyToOne
     @JoinColumn(name = "organizadorId")

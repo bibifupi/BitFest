@@ -24,6 +24,8 @@ public class EventoControlador {
         return eventoService.consultarUno(id);
     }
 
+    @GetMapping("/")
+
     @PostMapping
     public Evento createEvento(@RequestBody Evento evento) {
         return eventoService.crear(evento);
