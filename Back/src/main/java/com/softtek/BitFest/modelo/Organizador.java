@@ -17,6 +17,12 @@ public class Organizador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int organizadorId;
-
+    @Column (length = 60, nullable = false)
     private String nombre;
+    @Column (length = 100, nullable = false)
+    private String logotipo;
+    @Column (length = 100, nullable = false)
+    private String descripcionCorta;
+    @Column (length = 500, nullable = false)
+    private String descripcionLarga;
 }

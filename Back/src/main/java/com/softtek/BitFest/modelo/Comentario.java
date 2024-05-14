@@ -18,8 +18,9 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int comentarioId;
-
+    @Column (length = 500, nullable = false)
     private String texto;
+    @Column (length = 60, nullable = false)
     private Date fecha;
 
     @ManyToOne

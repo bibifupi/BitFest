@@ -19,5 +19,6 @@ public class Usuario {
     private String email;
     private String contraseña;
     private Date fechaRegistro;
+    private String imagen;
 
 }
