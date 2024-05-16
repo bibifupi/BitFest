@@ -12,5 +12,5 @@ public interface IEventoServicio extends ICRUD<Evento,Integer> {
 
     List<Evento>findByTituloLike(String titulo);
 
-    List<Organizador> consultaEventoPorOrganizador(@Param("nombre") String nombre);
+    List<Evento> consultaEventoPorOrganizador(@Param("nombre") String nombre);
 }

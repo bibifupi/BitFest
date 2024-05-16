@@ -8,11 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface IEventoRepositorio  extends IGenericoRepositorio<Evento,Integer>{
-    List<Evento>findFirst7ByFechaInicio(String fechaInicio);
+public interface IEventoRepositorio extends IGenericoRepositorio<Evento, Integer> {
+    List<Evento> findFirst7ByFechaInicio(String fechaInicio);
 
-    List<Evento>findByTituloLike(String titulo);
+    List<Evento> findByTituloLike(String titulo);
 
-    @Query("select e.organizador from Evento e where e.organizador.nombre = :nombre")
-    List<Organizador> consultaEventoPorOrganizador(@Param("nombre") String nombre);
+    //cruzar tablas organizador y evento con nativa
+    @Query(value= "select * from Evento e, Organizador o where e.idOrganizador=o.idOrganizador and o.nombre = :nombre", nativeQuery = true)
+    List<Evento> consultaEventoPorOrganizador(@Param("nombre") String nombre);
 }
