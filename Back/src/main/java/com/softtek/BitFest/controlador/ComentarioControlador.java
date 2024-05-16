@@ -16,14 +16,18 @@ public class ComentarioControlador {
     private IComentarioServicio servicio;
 
     @GetMapping
-    public List<Comentario> obtenerTodos() throws SQLException, ClassNotFoundException {
-
+    public List<Comentario> listarTodosLosComentarios() throws SQLException, ClassNotFoundException {
         return servicio.consultarTodos();
     }
 
     @GetMapping("/{id}")
-    public Comentario obtenerId(@PathVariable int id) throws SQLException, ClassNotFoundException {
+    public Comentario obtenerComentarioPorId(@PathVariable int id) throws SQLException, ClassNotFoundException {
         return servicio.consultarUno(id);
+    }
+
+    @GetMapping("/evento/{eventoId}")
+    public List<Comentario> listarComentariosPorEventoId(@PathVariable int eventoId) throws SQLException, ClassNotFoundException {
+        return servicio.findByEventoId(eventoId);
     }
 
     @PostMapping
@@ -37,7 +41,7 @@ public class ComentarioControlador {
     }
 
     @DeleteMapping("/{id}")
-    public void borrarComentario(@PathVariable int id) throws SQLException, ClassNotFoundException {
+    public void eliminarComentario(@PathVariable int id) throws SQLException, ClassNotFoundException {
         servicio.eliminar(id);
     }
 }

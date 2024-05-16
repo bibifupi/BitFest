@@ -17,6 +17,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int usuarioId;
+
     @Column(length = 15, nullable = false)
     private String rol;
     @Column(length = 60, nullable = false)
@@ -28,7 +29,7 @@ public class Usuario {
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaRegistro;
-    @Column(length = 100, nullable = false)
+    @Column (length = 100, nullable = false)
     private String imagen;
 
 }
