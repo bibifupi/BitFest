@@ -27,7 +27,19 @@ public class EventoControlador {
     }
 
     @GetMapping("/portitulo")
-    public ResponseEntity<List<Evento>>findByTituloLike(@RequestParam String titulo){ return new ResponseEntity<List<Evento>> (eventoService.findByTituloLike(titulo), HttpStatus.OK);};
+    public ResponseEntity<List<Evento>> findByTituloLike(@RequestParam String titulo) {
+        return new ResponseEntity<List<Evento>>(eventoService.findByTituloLike(titulo), HttpStatus.OK);
+    }
+
+    @GetMapping("/7primeros")
+    public ResponseEntity<List<Evento>> findFirst7ByFechaInicio(@RequestParam String fechaInicio) {
+        return new ResponseEntity<List<Evento>>(eventoService.findFirst7ByFechaInicio(fechaInicio), HttpStatus.OK);
+    }
+
+    @GetMapping("/eventopororganizador")
+    public ResponseEntity<List<Evento>> consultaEventoPorOrganizador(@RequestParam String nombre) {
+        return new ResponseEntity<List<Evento>>(eventoService.consultaEventoPorOrganizador(nombre), HttpStatus.OK);
+    }
 
     @PostMapping
     public Evento createEvento(@RequestBody Evento evento) {
