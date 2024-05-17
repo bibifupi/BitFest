@@ -18,7 +18,7 @@ public class EventoControlador {
 
     @GetMapping
     public List<Evento> getAllEventos() {
-        return eventoService.consultarTodos();
+        return eventoService.findAllByOrderByFechaInicio();
     }
 
     @GetMapping("/{id}")

@@ -25,12 +25,10 @@ public class EventoDTO {
     @NotNull
     private Date fechaInicio;
     @NotNull
-    private Date fechaActualizacion;
-    @NotNull
     private String estado;
-
-    @ManyToOne
-    @JoinColumn(name = "organizadorId")
+    @NotNull
+    private String imagen;
+    @NotNull
     private Organizador organizador;
 
     public Evento castEvento() {
@@ -40,8 +38,9 @@ public class EventoDTO {
         e1.setDescripcionCorta(this.descripcionCorta);
         e1.setDescripcionLarga(this.descripcionLarga);
         e1.setFechaInicio(this.fechaInicio);
-        e1.setFechaActualizacion(this.fechaActualizacion);
         e1.setEstado(this.estado);
+        e1.setImagen(this.imagen);
+        e1.setOrganizador(this.organizador);
         return e1;
     }
 
@@ -51,8 +50,9 @@ public class EventoDTO {
         descripcionCorta = e.getDescripcionCorta();
         descripcionLarga = e.getDescripcionLarga();
         fechaInicio = e.getFechaInicio();
-        fechaActualizacion = e.getFechaActualizacion();
         estado = e.getEstado();
+        imagen=e.getImagen();
+        organizador=e.getOrganizador();
         return this;
     }
 }
