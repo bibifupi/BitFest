@@ -8,14 +8,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 public class EventoCategoriaDTO {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "eventoId")
+
     private Evento evento;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "categoriaId")
     private Categoria categoria;
 
     public EventoCategoria castEventoCategoria() {

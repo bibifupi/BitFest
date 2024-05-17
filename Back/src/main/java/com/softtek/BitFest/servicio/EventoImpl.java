@@ -31,6 +31,11 @@ public class EventoImpl extends CRUDImpl<Evento, Integer> implements IEventoServ
     }
 
     @Override
+    public List<Evento> findAllByOrderByFechaInicio() {
+        return eventRepo.findAllByOrderByFechaInicio();
+    }
+
+    @Override
     public List<Evento> consultaEventoPorOrganizador(String nombre) {
         return eventRepo.consultaEventoPorOrganizador(nombre);
     }

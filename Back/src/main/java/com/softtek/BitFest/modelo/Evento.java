@@ -31,7 +31,8 @@ public class Evento {
     private Date fechaActualizacion;
     @Column(length = 60, nullable = false)
     private String estado;
-
+    @Column(length = 100, nullable = false)
+    private String imagen;
 
     @ManyToOne
     @JoinColumn(name = "organizadorId")
