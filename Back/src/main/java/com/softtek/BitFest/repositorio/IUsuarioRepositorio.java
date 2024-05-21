@@ -2,6 +2,7 @@ package com.softtek.BitFest.repositorio;
 
 import com.softtek.BitFest.modelo.Comentario;
 import com.softtek.BitFest.modelo.Usuario;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.List;
 
