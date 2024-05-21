@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioImpl extends CRUDImpl<Usuario, Integer> implements IUsuarioServicio {
     @Autowired
@@ -19,9 +21,15 @@ public class UsuarioImpl extends CRUDImpl<Usuario, Integer> implements IUsuarioS
         return usuRepo;
     }
 
+
     @Override
-    public Usuario findByNombreAsc(String nombre) {
-        return (Usuario) usuRepo.findByNombreAsc(nombre);
+    public List <Usuario> findByNombreAsc(String nombre) {
+        return usuRepo.findByNombreAsc(nombre);
+    }
+
+    @Override
+    public List<Usuario> findByContenerLetra(String nombre) {
+        return usuRepo.findByContenerLetra(nombre);
     }
 
     @Override
