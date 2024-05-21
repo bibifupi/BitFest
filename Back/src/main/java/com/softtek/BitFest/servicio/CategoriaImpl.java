@@ -18,4 +18,24 @@ public class CategoriaImpl extends CRUDImpl<Categoria, Integer> implements ICate
         return catRepo;
     }
 
+    // Implementación de los métodos de ICategoriaRepositorio
+    @Override
+    public List<Categoria> findByNombre(String nombre) {
+        return catRepo.findByNombre(nombre);
+    }
+
+    @Override
+    public List<Categoria> findByNombreContaining(String palabra) {
+        return catRepo.findByNombreContaining(palabra);
+    }
+
+    @Override
+    public long countByNombre(String nombre) {
+        return catRepo.countByNombre(nombre);
+    }
+
+    @Override
+    public boolean existsByNombre(String nombre) {
+        return catRepo.existsByNombre(nombre);
+    }
 }
