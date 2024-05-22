@@ -29,7 +29,7 @@ public class Evento {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaActualizacion;
     @Column(length = 100, nullable = false)
-    private String categotia;
+    private String categoria;
     @Column(length = 500, nullable = false)
     private String imagen;
 
