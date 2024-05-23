@@ -38,13 +38,9 @@ public class ControladorComentario {
         return new ResponseEntity<>(Comentarioservicio.crear(comentario), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Comentario> actualizarComentario(@PathVariable("id") int id, @RequestBody Comentario comentario) {
-        if(Comentarioservicio.consultarUno(id)==null) {
-            return ResponseEntity.ok(Comentarioservicio.modificar(comentario));
-        } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Organizador " + id +" no encontrado");
-        }
+        return new ResponseEntity<>(Comentarioservicio.crear(comentario), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

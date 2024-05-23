@@ -37,13 +37,9 @@ public class ControladorEvento {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Evento> actualizarEvento(@PathVariable("id") int id, @RequestBody Evento evento) {
-        if(eventoServicio.consultarUno(id)==null) {
-            return ResponseEntity.ok(eventoServicio.modificar(evento));
-        } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Organizador " + id +" no encontrado");
-        }
+        return new ResponseEntity<>(eventoServicio.crear(evento), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
