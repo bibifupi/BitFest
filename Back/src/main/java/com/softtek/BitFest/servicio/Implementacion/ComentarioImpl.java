@@ -5,8 +5,9 @@ import com.softtek.BitFest.repositorio.IComentarioRepositorio;
 import com.softtek.BitFest.repositorio.IGenericoRepositorio;
 import com.softtek.BitFest.servicio.IComentarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class ComentarioImpl extends CRUDImpl<Comentario, Integer> implements IComentarioServicio {
 
     @Autowired
