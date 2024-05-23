@@ -24,7 +24,7 @@ public class Comentario {
 
     @ManyToOne
     @JoinColumn(name = "idEvento")
-    private Evento idEvento;
+    private Evento evento;
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")

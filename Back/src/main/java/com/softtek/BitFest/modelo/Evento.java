@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -24,10 +26,10 @@ public class Evento {
     private String descripcionLarga;
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaRealizacion;
+    private LocalDate fechaRealizacion;
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaActualizacion;
+    private LocalDate fechaActualizacion;
     @Column(length = 100, nullable = false)
     private String categoria;
     @Column(length = 500, nullable = false)

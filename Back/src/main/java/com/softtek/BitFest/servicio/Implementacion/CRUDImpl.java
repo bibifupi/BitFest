@@ -2,8 +2,10 @@ package com.softtek.BitFest.servicio.Implementacion;
 
 import com.softtek.BitFest.repositorio.IGenericoRepositorio;
 import com.softtek.BitFest.servicio.ICRUD;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
+
 
 public abstract class CRUDImpl<T,ID> implements ICRUD<T,ID> {
     protected abstract IGenericoRepositorio<T,ID> getRepo();
