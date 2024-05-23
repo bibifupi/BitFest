@@ -3,7 +3,6 @@ package com.softtek.BitFest.servicio.Implementacion;
 import com.softtek.BitFest.repositorio.IGenericoRepositorio;
 import com.softtek.BitFest.servicio.ICRUD;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
