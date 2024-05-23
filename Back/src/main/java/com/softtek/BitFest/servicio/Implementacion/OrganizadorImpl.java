@@ -5,7 +5,9 @@ import com.softtek.BitFest.repositorio.IGenericoRepositorio;
 import com.softtek.BitFest.repositorio.IOrganizadorRepositorio;
 import com.softtek.BitFest.servicio.IOrganizadorServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrganizadorImpl  extends CRUDImpl<Organizador, Integer> implements IOrganizadorServicio {
 
     @Autowired

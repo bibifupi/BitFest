@@ -8,7 +8,9 @@ import com.softtek.BitFest.repositorio.IUsuarioRepositorio;
 import com.softtek.BitFest.servicio.IOrganizadorServicio;
 import com.softtek.BitFest.servicio.IUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioImpl extends CRUDImpl<Usuario, Integer> implements IUsuarioServicio {
 
     @Autowired
