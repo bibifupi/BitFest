@@ -1,14 +1,16 @@
 package com.softtek.BitFest.Controlador;
 
+import com.softtek.BitFest.Excepciones.ExcepcionPersonalizadaNoEncontrado;
 import com.softtek.BitFest.modelo.Organizador;
 import com.softtek.BitFest.servicio.IOrganizadorServicio;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -21,29 +23,46 @@ public class ControladorOrganizador {
     private IOrganizadorServicio servicio;
 
     @GetMapping
-    public List<Organizador> obtenerTodos() throws SQLException, ClassNotFoundException {
-
-        return servicio.consultarTodos();
+    public ResponseEntity<List<Organizador>> obtenerTodos() {
+        return new ResponseEntity<>(servicio.consultarTodos(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Organizador obtenerId(@PathVariable int id) throws SQLException, ClassNotFoundException {
-        return servicio.consultarUno(id);
+    public ResponseEntity<Organizador> obtenerId(@PathVariable int id) {
+        return new ResponseEntity<>(servicio.consultarUno(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public void insertarOrganizador(@RequestBody Organizador organizador) throws SQLException, ClassNotFoundException {
-        servicio.crear(organizador);
+    public ResponseEntity<Organizador> insertarOrganizador(@RequestBody Organizador organizador) {
+        return new ResponseEntity<>(servicio.crear(organizador), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public void actualizarOrganizador(@RequestBody Organizador organizador) throws SQLException, ClassNotFoundException {
-        servicio.modificar(organizador);
+    public ResponseEntity<Organizador> actualizarOrganizador(@PathVariable("id") int id, @RequestBody Organizador organizador) {
+        if(servicio.consultarUno(id)==null) {
+            return ResponseEntity.ok(servicio.modificar(organizador));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Organizador " + id +" no encontrado");
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void borrarOrganizador(@PathVariable int id) throws SQLException, ClassNotFoundException {
-        servicio.eliminar(id);
+    public ResponseEntity<Void> borrarOrganizador(@PathVariable("id") int id) {
+        if(servicio.consultarUno(id)==null) {
+            return ResponseEntity.noContent().build();
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario " + id +" no encontrado");
+        }
+    }
+
+    @GetMapping("/porOrganizador")
+    public ResponseEntity<List<Organizador>> findFirst7ByNombre(@RequestParam(name="nombre") String nombre){
+        return new ResponseEntity<>(servicio.findFirst7ByNombre(nombre), HttpStatus.OK);
+    }
+
+    @GetMapping("/porOrganizadorLike")
+    public ResponseEntity<List<Organizador>> findByNombreLike(@RequestParam(name="nombre") String nombre){
+        return new ResponseEntity<>(servicio.findByNombreLike(nombre), HttpStatus.OK);
     }
 
 }
