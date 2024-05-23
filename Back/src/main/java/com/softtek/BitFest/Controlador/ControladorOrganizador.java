@@ -29,7 +29,11 @@ public class ControladorOrganizador {
 
     @GetMapping("/{id}")
     public ResponseEntity<Organizador> obtenerId(@PathVariable int id) {
-        return new ResponseEntity<>(servicio.consultarUno(id), HttpStatus.OK);
+        if(servicio.consultarUno(id)!=null) {
+            return ResponseEntity.ok(servicio.consultarUno(id));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id " + id +" no encontrado");
+        }
     }
 
     @PostMapping
@@ -39,19 +43,19 @@ public class ControladorOrganizador {
 
     @PutMapping
     public ResponseEntity<Organizador> actualizarOrganizador(@PathVariable("id") int id, @RequestBody Organizador organizador) {
-        if(servicio.consultarUno(id)==null) {
+        if(servicio.consultarUno(id)!=null) {
             return ResponseEntity.ok(servicio.modificar(organizador));
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Organizador " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> borrarOrganizador(@PathVariable("id") int id) {
-        if(servicio.consultarUno(id)==null) {
+        if(servicio.consultarUno(id)!=null) {
             return ResponseEntity.noContent().build();
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Usuario " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");
         }
     }
 
