@@ -49,6 +49,7 @@ public class ControladorOrganizador {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> borrarOrganizador(@PathVariable("id") int id) {
         if(servicio.consultarUno(id)!=null) {
+            servicio.eliminar(id);
             return ResponseEntity.noContent().build();
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");

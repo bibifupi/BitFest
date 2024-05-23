@@ -28,10 +28,10 @@ public class ControladorEvento {
 
     @GetMapping("/{id}")
     public ResponseEntity<Evento> obtenerEventoId(@PathVariable("id") int id) {
-        if(eventoServicio.consultarUno(id)!=null) {
+        if (eventoServicio.consultarUno(id) != null) {
             return ResponseEntity.ok(eventoServicio.consultarUno(id));
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id + " no encontrado");
         }
     }
 
@@ -48,7 +48,7 @@ public class ControladorEvento {
 
     @DeleteMapping("/{id}")
     public ResponseEntity borrarEvento(@PathVariable("id") int id) {
-        if(eventoServicio.consultarUno(id) != null) {
+        if (eventoServicio.consultarUno(id) != null) {
             eventoServicio.eliminar(id);
             return ResponseEntity.noContent().build();
         } else {
@@ -61,6 +61,7 @@ public class ControladorEvento {
     public ResponseEntity<List<Evento>> findByTituloLike(@RequestParam String titulo) {
         return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
     }
+
     @GetMapping("/7primeros")
     public ResponseEntity<List<Evento>> findFirst7ByFechaRealizacion(@RequestParam LocalDate fechaRealizacion) {
         return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
