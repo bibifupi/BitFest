@@ -40,17 +40,14 @@ public class ControladorUsuario {
     }
 
     @PutMapping
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
-        if(servicio.consultarUno(id)!=null) {
-            return ResponseEntity.ok(servicio.modificar(usuario));
-        } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id  " + id +" no encontrado");
-        }
+    public ResponseEntity<Usuario> actualizarUsuario( @RequestBody Usuario usuario) {
+        return new ResponseEntity<>(servicio.modificar(usuario), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> borrarUsuario(@PathVariable("id") int id) {
         if(servicio.consultarUno(id)!=null) {
+            servicio.eliminar(id);
         return ResponseEntity.noContent().build();
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id  " + id +" no encontrado");
