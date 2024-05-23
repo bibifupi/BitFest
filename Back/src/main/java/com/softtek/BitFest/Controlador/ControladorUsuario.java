@@ -27,7 +27,11 @@ public class ControladorUsuario {
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obtenerId(@PathVariable int id) {
-        return new ResponseEntity<>(servicio.consultarUno(id), HttpStatus.OK);
+        if(servicio.consultarUno(id)!= null) {
+            return ResponseEntity.ok(servicio.consultarUno(id));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id " + id +" no encontrado");
+        }
     }
 
     @PostMapping
@@ -37,19 +41,19 @@ public class ControladorUsuario {
 
     @PutMapping
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
-        if(servicio.consultarUno(id)==null) {
+        if(servicio.consultarUno(id)!=null) {
             return ResponseEntity.ok(servicio.modificar(usuario));
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Usuario " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id  " + id +" no encontrado");
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> borrarUsuario(@PathVariable("id") int id) {
-        if(servicio.consultarUno(id)==null) {
+        if(servicio.consultarUno(id)!=null) {
         return ResponseEntity.noContent().build();
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Usuario " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id  " + id +" no encontrado");
         }
 
     }

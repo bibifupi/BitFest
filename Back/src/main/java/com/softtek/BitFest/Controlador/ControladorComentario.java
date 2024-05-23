@@ -25,7 +25,11 @@ public class ControladorComentario {
 
     @GetMapping("/{id}")
     public ResponseEntity<Comentario> obtenerComentarioPorId(@PathVariable int id) {
-        return new ResponseEntity<>(Comentarioservicio.consultarUno(id), HttpStatus.OK);
+        if(Comentarioservicio.consultarUno(id) != null) {
+            return ResponseEntity.ok(Comentarioservicio.consultarUno(id));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Comentario con ID " + id + " no encontrado");
+        }
     }
 
     @GetMapping("/evento/{eventoId}")
@@ -40,16 +44,24 @@ public class ControladorComentario {
 
     @PutMapping
     public ResponseEntity<Comentario> actualizarComentario(@PathVariable("id") int id, @RequestBody Comentario comentario) {
+<<<<<<< HEAD
         return new ResponseEntity<>(Comentarioservicio.crear(comentario), HttpStatus.OK);
+=======
+        if(Comentarioservicio.consultarUno(id)!=null) {
+            return ResponseEntity.ok(Comentarioservicio.modificar(comentario));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Comentario " + id +" no encontrado");
+        }
+>>>>>>> dc385cbc1f59631fbb337a129f1feca967d32f94
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarComentario(@PathVariable int id){
-        if(Comentarioservicio.consultarUno(id) == null) {
+        if(Comentarioservicio.consultarUno(id) != null) {
             Comentarioservicio.eliminar(id);
             return ResponseEntity.noContent().build();
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Evento con ID " + id + " no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Comentario con ID " + id + " no encontrado");
         }
     }
 }

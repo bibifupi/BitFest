@@ -28,7 +28,11 @@ public class ControladorEvento {
 
     @GetMapping("/{id}")
     public ResponseEntity<Evento> obtenerEventoId(@PathVariable("id") int id) {
-        return new ResponseEntity<>(eventoServicio.consultarUno(id), HttpStatus.OK);
+        if(eventoServicio.consultarUno(id)!=null) {
+            return ResponseEntity.ok(eventoServicio.consultarUno(id));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id +" no encontrado");
+        }
     }
 
     @PostMapping
@@ -39,16 +43,24 @@ public class ControladorEvento {
 
     @PutMapping
     public ResponseEntity<Evento> actualizarEvento(@PathVariable("id") int id, @RequestBody Evento evento) {
+<<<<<<< HEAD
         return new ResponseEntity<>(eventoServicio.crear(evento), HttpStatus.OK);
+=======
+        if(eventoServicio.consultarUno(id)!=null) {
+            return ResponseEntity.ok(eventoServicio.modificar(evento));
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id  " + id +" no encontrado");
+        }
+>>>>>>> dc385cbc1f59631fbb337a129f1feca967d32f94
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity borrarEvento(@PathVariable("id") int id) {
-        if(eventoServicio.consultarUno(id) == null) {
+        if(eventoServicio.consultarUno(id) != null) {
             eventoServicio.eliminar(id);
             return ResponseEntity.noContent().build();
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Evento con ID " + id + " no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id + " no encontrado");
         }
     }
 
