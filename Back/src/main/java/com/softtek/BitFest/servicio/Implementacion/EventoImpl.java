@@ -21,8 +21,8 @@ public class EventoImpl extends CRUDImpl<Evento, Integer> implements IEventoServ
     }
 
     @Override
-    public List<Evento> findFirst7ByFechaRealizacion(LocalDate fechaRealizacion) {
-        return eventoRepo.findFirst7ByFechaRealizacion(fechaRealizacion);
+    public List<Evento> findFirst7ByFechaRealizacionGreaterThanEqual() {
+        return eventoRepo.findFirst7ByFechaRealizacionGreaterThanEqual(LocalDate.now());
     }
 
     @Override

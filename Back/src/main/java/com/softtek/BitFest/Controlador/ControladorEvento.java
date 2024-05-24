@@ -58,23 +58,23 @@ public class ControladorEvento {
 
 
     @GetMapping("/portitulo")
-    public ResponseEntity<List<Evento>> findByTituloLike(@RequestParam String titulo) {
-        return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
+    public ResponseEntity<List<Evento>> findByTituloLike(@RequestParam(name = "titulo") String titulo) {
+        return new ResponseEntity<>(eventoServicio.findByTituloLike(titulo), HttpStatus.OK);
     }
 
     @GetMapping("/7primeros")
-    public ResponseEntity<List<Evento>> findFirst7ByFechaRealizacion(@RequestParam LocalDate fechaRealizacion) {
-        return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
+    public ResponseEntity<List<Evento>> findFirst7ByFechaRealizacionGreaterThanEqual() {
+        return new ResponseEntity<>(eventoServicio.findFirst7ByFechaRealizacionGreaterThanEqual(), HttpStatus.OK);
     }
 
     @GetMapping("/FechaRealizacion")
     public ResponseEntity<List<Evento>> findAllByOrderByFechaRealizacion() {
-        return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
+        return new ResponseEntity<>(eventoServicio.findAllByOrderByFechaRealizacion(), HttpStatus.OK);
     }
 
     @GetMapping("/eventopororganizador")
     public ResponseEntity<List<Evento>> findByOrganizador_NombreOrderByOrganizador_Nombre(@RequestParam String Busqueda) {
-        return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
+        return new ResponseEntity<>(eventoServicio.findByOrganizador_NombreOrderByOrganizador_Nombre(Busqueda), HttpStatus.OK);
     }
 
 }
