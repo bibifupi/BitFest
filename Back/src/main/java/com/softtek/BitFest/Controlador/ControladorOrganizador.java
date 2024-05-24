@@ -55,11 +55,11 @@ public class ControladorOrganizador {
             throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");
         }
     }
-
     @GetMapping("/porOrganizador")
     public ResponseEntity<List<Organizador>> findFirst7ByNombre(@RequestParam(name="nombre") String nombre){
         return new ResponseEntity<>(servicio.findFirst7ByNombre(nombre), HttpStatus.OK);
     }
+
 
     @GetMapping("/porOrganizadorLike")
     public ResponseEntity<List<Organizador>> findByNombreLike(@RequestParam(name="nombre") String nombre){
