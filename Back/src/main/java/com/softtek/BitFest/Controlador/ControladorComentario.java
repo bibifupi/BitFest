@@ -32,7 +32,7 @@ public class ControladorComentario {
         }
     }
 
-    @GetMapping("/evento/{eventoId}")
+    @GetMapping("/evento/{idEvento}")
     public ResponseEntity<List<Comentario>> findByEvento_IdEvento(@PathVariable int idEvento) {
         return new ResponseEntity<>(Comentarioservicio.findByEvento_IdEvento(idEvento), HttpStatus.OK);
     }
