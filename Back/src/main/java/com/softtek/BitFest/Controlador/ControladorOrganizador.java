@@ -42,7 +42,7 @@ public class ControladorOrganizador {
     }
 
     @PutMapping
-    public ResponseEntity<Organizador> actualizarOrganizador(@PathVariable("id") int id, @RequestBody Organizador organizador) {
+    public ResponseEntity<Organizador> actualizarOrganizador(@RequestBody Organizador organizador) {
         return new ResponseEntity<>(servicio.modificar(organizador), HttpStatus.OK);
     }
 

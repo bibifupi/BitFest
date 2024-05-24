@@ -42,7 +42,7 @@ public class ControladorEvento {
     }
 
     @PutMapping
-    public ResponseEntity<Evento> actualizarEvento(@PathVariable("id") int id, @RequestBody Evento evento) {
+    public ResponseEntity<Evento> actualizarEvento(@RequestBody Evento evento) {
         return new ResponseEntity<>(eventoServicio.crear(evento), HttpStatus.OK);
     }
 

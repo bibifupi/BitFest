@@ -43,7 +43,7 @@ public class ControladorComentario {
     }
 
     @PutMapping
-    public ResponseEntity<Comentario> actualizarComentario(@PathVariable("id") int id, @RequestBody Comentario comentario) {
+    public ResponseEntity<Comentario> actualizarComentario(@RequestBody Comentario comentario) {
         return new ResponseEntity<>(Comentarioservicio.crear(comentario), HttpStatus.OK);
     }
 
