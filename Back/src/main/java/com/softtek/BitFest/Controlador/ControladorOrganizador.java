@@ -43,11 +43,15 @@ public class ControladorOrganizador {
 
     @PutMapping
     public ResponseEntity<Organizador> actualizarOrganizador(@PathVariable("id") int id, @RequestBody Organizador organizador) {
+<<<<<<< HEAD
         if(servicio.consultarUno(id)!=null) {
             return ResponseEntity.ok(servicio.modificar(organizador));
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");
         }
+=======
+        return new ResponseEntity<>(servicio.modificar(organizador), HttpStatus.OK);
+>>>>>>> 599bb1feb194207a9ade9335a322d89a14f0f7cf
     }
 
     @DeleteMapping("/{id}")

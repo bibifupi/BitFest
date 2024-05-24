@@ -28,10 +28,10 @@ public class ControladorEvento {
 
     @GetMapping("/{id}")
     public ResponseEntity<Evento> obtenerEventoId(@PathVariable("id") int id) {
-        if(eventoServicio.consultarUno(id)!=null) {
+        if (eventoServicio.consultarUno(id) != null) {
             return ResponseEntity.ok(eventoServicio.consultarUno(id));
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id + " no encontrado");
         }
     }
 
@@ -43,16 +43,20 @@ public class ControladorEvento {
 
     @PutMapping("/{id}")
     public ResponseEntity<Evento> actualizarEvento(@PathVariable("id") int id, @RequestBody Evento evento) {
+<<<<<<< HEAD
         if(eventoServicio.consultarUno(id)!=null) {
             return ResponseEntity.ok(eventoServicio.modificar(evento));
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Evento con id  " + id +" no encontrado");
         }
+=======
+        return new ResponseEntity<>(eventoServicio.crear(evento), HttpStatus.OK);
+>>>>>>> 599bb1feb194207a9ade9335a322d89a14f0f7cf
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity borrarEvento(@PathVariable("id") int id) {
-        if(eventoServicio.consultarUno(id) != null) {
+        if (eventoServicio.consultarUno(id) != null) {
             eventoServicio.eliminar(id);
             return ResponseEntity.noContent().build();
         } else {
@@ -65,6 +69,7 @@ public class ControladorEvento {
     public ResponseEntity<List<Evento>> findByTituloLike(@RequestParam String titulo) {
         return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
     }
+
     @GetMapping("/7primeros")
     public ResponseEntity<List<Evento>> findFirst7ByFechaRealizacion(@RequestParam LocalDate fechaRealizacion) {
         return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);

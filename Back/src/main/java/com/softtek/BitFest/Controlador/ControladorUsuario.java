@@ -48,7 +48,11 @@ public class ControladorUsuario {
     public ResponseEntity<Void> borrarUsuario(@PathVariable("id") int id) {
         if(servicio.consultarUno(id)!=null) {
             servicio.eliminar(id);
+<<<<<<< HEAD
         return ResponseEntity.noContent().build();
+=======
+            return ResponseEntity.noContent().build();
+>>>>>>> 599bb1feb194207a9ade9335a322d89a14f0f7cf
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id  " + id +" no encontrado");
         }
