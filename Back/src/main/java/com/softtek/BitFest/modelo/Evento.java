@@ -26,10 +26,10 @@ public class Evento {
     private String descripcionLarga;
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fechaRealizacion;
+    private Date fechaRealizacion;
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fechaActualizacion;
+    private Date fechaActualizacion;
     @Column(length = 100, nullable = false)
     private String categoria;
     @Column(length = 500, nullable = false)
