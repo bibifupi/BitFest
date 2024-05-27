@@ -1,8 +1,11 @@
 package com.softtek.BitFest.Controlador;
 
 import com.softtek.BitFest.Excepciones.ExcepcionPersonalizadaNoEncontrado;
+import com.softtek.BitFest.dto.UsuarioPerfilDTO;
+import com.softtek.BitFest.dto.UsuarioRegistroDTO;
 import com.softtek.BitFest.modelo.Usuario;
 import com.softtek.BitFest.servicio.IUsuarioServicio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,33 +29,43 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> obtenerId(@PathVariable int id) {
-        if(servicio.consultarUno(id)!= null) {
-            return ResponseEntity.ok(servicio.consultarUno(id));
+    public ResponseEntity<UsuarioPerfilDTO> obtenerId(@PathVariable (name="id") Integer id) {
+        Usuario u1 = servicio.consultarUno(id);
+        if (u1 != null) {
+            return new ResponseEntity<>((new UsuarioPerfilDTO()).castUsuarioPerfilDTO(u1), HttpStatus.OK);
         } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id " + id +" no encontrado");
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id " + id + " no encontrado");
         }
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> insertarUsuario(@RequestBody Usuario usuario) {
-        return new ResponseEntity<>(servicio.crear(usuario), HttpStatus.CREATED);
+    public ResponseEntity<UsuarioRegistroDTO> insertarUsuario(@Valid @RequestBody UsuarioRegistroDTO u) {
+        Usuario u1 = u.castUsuario();
+        u1 = servicio.crear(u1);
+        return new ResponseEntity<>(u.castUsuarioRegistroDTO(u1), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Usuario> actualizarUsuario( @RequestBody Usuario usuario) {
-        return new ResponseEntity<>(servicio.modificar(usuario), HttpStatus.OK);
+    public ResponseEntity<UsuarioPerfilDTO> actualizarUsuario( @Valid @RequestBody UsuarioPerfilDTO u) {
+        Usuario u1 = servicio.consultarUno(u.getIdUsuario());
+        if (u1 != null) {
+            u1 = servicio.modificar(u.castUsuario());
+            return new ResponseEntity<>(u.castUsuarioPerfilDTO(u1), HttpStatus.OK);
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario no encontrado " + u.getIdUsuario());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> borrarUsuario(@PathVariable("id") int id) {
-        if(servicio.consultarUno(id)!=null) {
-            servicio.eliminar(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id  " + id +" no encontrado");
-        }
+    public ResponseEntity<Void> borrarUsuario(@PathVariable(name = "id") Integer id) {
 
+        Usuario u1 = servicio.consultarUno(id);
+        if (u1 != null) {
+            servicio.eliminar(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario con id " + id + " no encontrado");
+        }
     }
 
     @GetMapping("/pornombreUsuario")

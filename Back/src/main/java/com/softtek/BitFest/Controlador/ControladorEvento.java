@@ -1,16 +1,18 @@
 package com.softtek.BitFest.Controlador;
 
 import com.softtek.BitFest.Excepciones.ExcepcionPersonalizadaNoEncontrado;
+import com.softtek.BitFest.dto.EventoDTO;
+import com.softtek.BitFest.dto.EventoDetalleDTO;
+import com.softtek.BitFest.dto.EventoInicioDTO;
 import com.softtek.BitFest.modelo.Evento;
 import com.softtek.BitFest.servicio.IEventoServicio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,35 +24,51 @@ public class ControladorEvento {
     private IEventoServicio eventoServicio;
 
     @GetMapping
-    public ResponseEntity<List<Evento>> obtenerTodosEventos() {
-        return new ResponseEntity<>(eventoServicio.consultarTodos(), HttpStatus.OK);
+    public ResponseEntity<List<EventoInicioDTO>> obtenerTodosEventos() {
+        List<Evento> eventosBBDD = eventoServicio.consultarTodos();
+        List<EventoInicioDTO> eventosDTO = new ArrayList<>();
+        for (Evento elemento : eventosBBDD) {
+            EventoInicioDTO eDTO = new EventoInicioDTO();
+            eventosDTO.add(eDTO.castEventoDTO(elemento));
+        }
+        return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Evento> obtenerEventoId(@PathVariable("id") int id) {
-        if (eventoServicio.consultarUno(id) != null) {
-            return ResponseEntity.ok(eventoServicio.consultarUno(id));
+    public ResponseEntity<EventoDetalleDTO> obtenerEventoId(@PathVariable(name = "id") Integer id) {
+        Evento e1 = eventoServicio.consultarUno(id);
+        if (e1 != null) {
+            return new ResponseEntity<>((new EventoDetalleDTO()).castEventoDetalleDTO(e1), HttpStatus.OK);
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id + " no encontrado");
         }
     }
 
     @PostMapping
-    public ResponseEntity<Evento> insertarEvento(@RequestBody Evento evento) {
-        return new ResponseEntity<>(eventoServicio.crear(evento), HttpStatus.CREATED);
+    public ResponseEntity<EventoDTO> insertarEvento(@Valid @RequestBody EventoDTO e) {
+        Evento e1 = e.castEvento();
+        e1 = eventoServicio.crear(e1);
+        return new ResponseEntity<>(e.castEventoDTO(e1), HttpStatus.CREATED);
 
     }
 
     @PutMapping
-    public ResponseEntity<Evento> actualizarEvento(@RequestBody Evento evento) {
-        return new ResponseEntity<>(eventoServicio.crear(evento), HttpStatus.OK);
+    public ResponseEntity<EventoDTO> actualizarEvento(@Valid @RequestBody EventoDTO e) {
+        Evento e1 = eventoServicio.consultarUno(e.getIdEvento());
+        if (e1 != null) {
+            e1 = eventoServicio.modificar(e.castEvento());
+            return new ResponseEntity<>(e.castEventoDTO(e1), HttpStatus.OK);
+        } else {
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento no encontrado " + e.getIdEvento());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity borrarEvento(@PathVariable("id") int id) {
-        if (eventoServicio.consultarUno(id) != null) {
+    public ResponseEntity<Void> borrarEvento(@PathVariable(name = "id") Integer id) {
+        Evento e1 = eventoServicio.consultarUno(id);
+        if (e1 != null) {
             eventoServicio.eliminar(id);
-            return ResponseEntity.noContent().build();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Evento con id " + id + " no encontrado");
         }
@@ -58,23 +76,48 @@ public class ControladorEvento {
 
 
     @GetMapping("/portitulo")
-    public ResponseEntity<List<Evento>> findByTituloLike(@RequestParam(name = "titulo") String titulo) {
-        return new ResponseEntity<>(eventoServicio.findByTituloLike(titulo), HttpStatus.OK);
+    public ResponseEntity<List<EventoInicioDTO>> findByTituloLike(@RequestParam(name = "titulo") String titulo) {
+        List<Evento> eventosBBDD = eventoServicio.findByTituloLike(titulo);
+        List<EventoInicioDTO> eventosDTO = new ArrayList<>();
+        for (Evento elemento : eventosBBDD) {
+            EventoInicioDTO eDTO = new EventoInicioDTO();
+            eventosDTO.add(eDTO.castEventoDTO(elemento));
+        }
+        return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
     }
 
     @GetMapping("/7primeros")
-    public ResponseEntity<List<Evento>> findFirst7ByFechaRealizacionGreaterThanEqual() {
-        return new ResponseEntity<>(eventoServicio.findFirst7ByFechaRealizacionGreaterThanEqual(), HttpStatus.OK);
+    public ResponseEntity<List<EventoInicioDTO>> findFirst7ByFechaRealizacionGreaterThanEqual() {
+        List<Evento> eventosBBDD = eventoServicio.findFirst7ByFechaRealizacionGreaterThanEqual();
+        List<EventoInicioDTO> eventosDTO = new ArrayList<>();
+        for (Evento elemento : eventosBBDD) {
+            EventoInicioDTO eDTO = new EventoInicioDTO();
+            eventosDTO.add(eDTO.castEventoDTO(elemento));
+        }
+        return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
+
     }
 
     @GetMapping("/FechaRealizacion")
-    public ResponseEntity<List<Evento>> findAllByOrderByFechaRealizacion() {
-        return new ResponseEntity<>(eventoServicio.findAllByOrderByFechaRealizacion(), HttpStatus.OK);
+    public ResponseEntity<List<EventoInicioDTO>> findAllByOrderByFechaRealizacion() {
+        List<Evento> eventosBBDD = eventoServicio.findAllByOrderByFechaRealizacion();
+        List<EventoInicioDTO> eventosDTO = new ArrayList<>();
+        for (Evento elemento : eventosBBDD) {
+            EventoInicioDTO eDTO = new EventoInicioDTO();
+            eventosDTO.add(eDTO.castEventoDTO(elemento));
+        }
+        return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
     }
 
     @GetMapping("/eventopororganizador")
-    public ResponseEntity<List<Evento>> findByOrganizador_NombreOrderByOrganizador_Nombre(@RequestParam String Busqueda) {
-        return new ResponseEntity<>(eventoServicio.findByOrganizador_NombreOrderByOrganizador_Nombre(Busqueda), HttpStatus.OK);
+    public ResponseEntity<List<EventoInicioDTO>> findByOrganizador_NombreOrderByOrganizador_Nombre(@RequestParam String Busqueda) {
+        List<Evento> eventosBBDD = eventoServicio.findByOrganizador_NombreOrderByOrganizador_Nombre(Busqueda);
+        List<EventoInicioDTO> eventosDTO = new ArrayList<>();
+        for (Evento elemento : eventosBBDD) {
+            EventoInicioDTO eDTO = new EventoInicioDTO();
+            eventosDTO.add(eDTO.castEventoDTO(elemento));
+        }
+        return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
     }
 
 }
