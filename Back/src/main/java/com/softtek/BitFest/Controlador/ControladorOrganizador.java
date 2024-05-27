@@ -1,6 +1,8 @@
 package com.softtek.BitFest.Controlador;
 
 import com.softtek.BitFest.Excepciones.ExcepcionPersonalizadaNoEncontrado;
+import com.softtek.BitFest.dto.OrganizadorDTO;
+import com.softtek.BitFest.dto.OrganizadorInformacionDTO;
 import com.softtek.BitFest.modelo.Organizador;
 import com.softtek.BitFest.servicio.IOrganizadorServicio;
 import org.springframework.http.HttpStatus;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -23,17 +27,23 @@ public class ControladorOrganizador {
     private IOrganizadorServicio servicio;
 
     @GetMapping
-    public ResponseEntity<List<Organizador>> obtenerTodos() {
-        return new ResponseEntity<>(servicio.consultarTodos(), HttpStatus.OK);
+    public ResponseEntity<List<OrganizadorDTO>> obtenerTodos() {
+        List<Organizador> organizadoresBBDD = servicio.consultarTodos();
+        List<OrganizadorDTO> organizadoresDTO = new ArrayList<>();
+        for (Organizador elemento : organizadoresBBDD) {
+            OrganizadorDTO eDto = new OrganizadorDTO();
+            organizadoresDTO.add(eDto.castDto(elemento));
+        }
+        return new ResponseEntity<>(organizadoresDTO, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Organizador> obtenerId(@PathVariable int id) {
-        if(servicio.consultarUno(id)!=null) {
-            return ResponseEntity.ok(servicio.consultarUno(id));
-        } else {
-            throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id " + id +" no encontrado");
+    public ResponseEntity<OrganizadorInformacionDTO> obtenerId(@PathVariable(name = "id") Integer id) {
+        Organizador organizador = servicio.consultarUno(id);
+        if (organizador == null) {
+            throw new ExcepcionPersonalizadaNoEncontrado("Organizador no encontrado " + id);
         }
+        return new ResponseEntity<>((new OrganizadorInformacionDTO()).castDto(organizador), HttpStatus.OK);
     }
 
     @PostMapping
@@ -54,16 +64,26 @@ public class ControladorOrganizador {
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");
         }
+    } @GetMapping("/porOrganizador")
+    public ResponseEntity<List<OrganizadorDTO>> findFirst7ByNombre(@RequestParam(name="nombre") String nombre){
+        List<Organizador> organizadores = servicio.findFirst7ByNombre(nombre);
+        List<OrganizadorDTO> organizadoresDTO = new ArrayList<>();
+        for (Organizador organizador : organizadores) {
+            OrganizadorDTO dto = new OrganizadorDTO();
+            organizadoresDTO.add(dto.castDto(organizador));
+        }
+        return new ResponseEntity<>(organizadoresDTO, HttpStatus.OK);
     }
-    @GetMapping("/porOrganizador")
-    public ResponseEntity<List<Organizador>> findFirst7ByNombre(@RequestParam(name="nombre") String nombre){
-        return new ResponseEntity<>(servicio.findFirst7ByNombre(nombre), HttpStatus.OK);
-    }
-
 
     @GetMapping("/porOrganizadorLike")
-    public ResponseEntity<List<Organizador>> findByNombreLike(@RequestParam(name="nombre") String nombre){
-        return new ResponseEntity<>(servicio.findByNombreLike(nombre), HttpStatus.OK);
+    public ResponseEntity<List<OrganizadorDTO>> findByNombreLike(@RequestParam(name="nombre") String nombre){
+        List<Organizador> organizadores = servicio.findByNombreLike(nombre);
+        List<OrganizadorDTO> organizadoresDTO = new ArrayList<>();
+        for (Organizador organizador : organizadores) {
+            OrganizadorDTO dto = new OrganizadorDTO();
+            organizadoresDTO.add(dto.castDto(organizador));
+        }
+        return new ResponseEntity<>(organizadoresDTO, HttpStatus.OK);
     }
 
 }
