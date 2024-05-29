@@ -37,7 +37,7 @@ public class EventoDTO {
     @NotEmpty
     @Size(min = 3, max = 500)
     private String imagen;
-    @NotEmpty
+    @NotNull
     private Organizador organizador;
 
     public Evento castEvento() {
@@ -45,7 +45,7 @@ public class EventoDTO {
         e1.setIdEvento(this.idEvento);
         e1.setTitulo(this.titulo);
         e1.setDescripcionCorta(this.descripcionCorta);
-        e1.setDescripcionCorta(this.descripcionLarga);
+        e1.setDescripcionLarga(this.descripcionLarga);
         e1.setFechaRealizacion(this.fechaRealizacion);
         e1.setFechaActualizacion(this.fechaActualizacion);
         e1.setCategoria(this.categoria);
