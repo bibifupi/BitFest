@@ -1,12 +1,11 @@
 package com.softtek.BitFest.modelo;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-
-
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -29,8 +28,8 @@ public class Usuario {
     private String contraseña;
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaRegistro;
-    @Column(length = 100, nullable = false)
+    private LocalDate fechaRegistro;
+    @Column(length = 500, nullable = false)
     private String imagen;
 
     @Enumerated(EnumType.STRING)
