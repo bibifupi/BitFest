@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -29,11 +31,12 @@ public class UsuarioRegistroDTO {
     @NotEmpty
     @Size(min = 3, max = 100)
     private String contraseña;
+    @NotNull
+    private LocalDate fechaRegistro;
     @NotEmpty
-    @Size(min = 3, max = 100)
+    @Size(min = 3, max = 500)
     private String imagen;
-    @NotEmpty
-    @Size(min = 3, max = 5)
+    @NotNull
     private Rol rol;
 
 
@@ -45,6 +48,7 @@ public class UsuarioRegistroDTO {
         u1.setNombreUsuario(this.nombreUsuario);
         u1.setEmail(this.email);
         u1.setContraseña(this.contraseña);
+        u1.setFechaRegistro(this.fechaRegistro.now());
         u1.setImagen(this.imagen);
         u1.setRol(Rol.USER);
         return u1;
@@ -56,6 +60,7 @@ public class UsuarioRegistroDTO {
         nombreUsuario=u.getNombreUsuario();
         email=u.getEmail();
         contraseña=u.getContraseña();
+        fechaRegistro=u.getFechaRegistro();
         imagen=u.getImagen();
         rol=u.getRol();
         return this;
