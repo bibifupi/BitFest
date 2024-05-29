@@ -1,0 +1,23 @@
+
+<div class="container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/inicio">BitFest</a>
+    </div>
+    <div class="navbar-links">
+      <a href="/eventos">Eventos</a>
+      <a href="/organizadores">Organizadores</a>
+      <a href="/creareventos">Crear eventos</a>
+      <a href="/perfil">Perfil</a>
+    </div>
+  </nav>
+
+
+<div class="container">
+    <h1>Crear un nuevo evento</h1>
+    <input [(ngModel)]="nuevoEvento.nombre" placeholder="Nombre del evento">
+    <input [(ngModel)]="nuevoEvento.descripcion" placeholder="Descripción del evento">
+    <input [(ngModel)]="nuevoEvento.fecha" placeholder="Fecha del evento">
+    <button>Crear evento</button>
+  </div>
+  
