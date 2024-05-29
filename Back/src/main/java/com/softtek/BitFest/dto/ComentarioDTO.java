@@ -4,6 +4,7 @@ import com.softtek.BitFest.modelo.Comentario;
 import com.softtek.BitFest.modelo.Evento;
 import com.softtek.BitFest.modelo.Usuario;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class ComentarioDTO {
-    @NotEmpty
+    @NotNull
     private int idComentario;
 
     @NotEmpty
@@ -24,10 +25,10 @@ public class ComentarioDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
-    @NotEmpty
+    @NotNull
     private Evento idEvento;
 
-    @NotEmpty
+    @NotNull
     private Usuario idUsuario;
 
     public Comentario castComentario() {
