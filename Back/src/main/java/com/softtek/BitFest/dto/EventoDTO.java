@@ -28,9 +28,9 @@ public class EventoDTO {
     @Size(min = 10, max = 500)
     private String descripcionLarga;
     @NotNull
-    private Date fechaRealizacion;
+    private LocalDate fechaRealizacion;
     @NotNull
-    private Date fechaActualizacion;
+    private LocalDate fechaActualizacion;
     @NotEmpty
     @Size(min = 3, max = 100)
     private String categoria;

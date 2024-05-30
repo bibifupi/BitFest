@@ -24,7 +24,7 @@ public class EventoInicioDTO {
     @Size(min = 3, max = 100)
     private String descripcionCorta;
     @NotNull
-    private Date fechaRealizacion;
+    private LocalDate fechaRealizacion;
     @NotEmpty
     @Size(min = 3, max = 500)
     private String imagen;
