@@ -22,7 +22,7 @@ public class EventoImpl extends CRUDImpl<Evento, Integer> implements IEventoServ
 
     @Override
     public List<Evento> findFirst7ByFechaRealizacionGreaterThanEqual() {
-        return eventoRepo.findFirst7ByFechaRealizacionGreaterThanEqual(LocalDate.now());
+        return eventoRepo.findFirst7ByFechaRealizacionGreaterThanEqualOrderByFechaRealizacionAsc(LocalDate.now());
     }
 
     @Override
@@ -34,8 +34,14 @@ public class EventoImpl extends CRUDImpl<Evento, Integer> implements IEventoServ
     public List<Evento> findAllByOrderByFechaRealizacion() {
         return eventoRepo.findAllByOrderByFechaRealizacion();
     }
+
     @Override
-    public List<Evento> findByOrganizador_NombreOrderByOrganizador_Nombre(String Busqueda) {
-        return eventoRepo.findByOrganizador_NombreOrderByOrganizador_Nombre(Busqueda);
+    public List<Evento> findByOrganizador_NombreOrderByOrganizador_Nombre(String nombre) {
+        return eventoRepo.findByOrganizador_NombreOrderByOrganizador_Nombre(nombre);
+    }
+
+    @Override
+    public List<Evento> buscarEventos(String query) {
+        return eventoRepo.findByTituloContainingIgnoreCaseOrOrganizador_NombreContainingIgnoreCase(query, query);
     }
 }

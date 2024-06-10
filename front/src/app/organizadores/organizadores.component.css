@@ -1,0 +1,315 @@
+/* Global Styles */
+* {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 16px;
+  
+}
+ 
+/* Container */
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+ 
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+ 
+.navbar-brand a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #802d97;
+  text-decoration: none;
+}
+ 
+.navbar-links a {
+  margin-left: 20px;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+ 
+.navbar-links a:hover {
+  color: #5c206d;
+}
+ 
+/* Separación entre la navbar y el contenido */
+main {
+  margin-top: 20px;
+}
+ 
+.featured-organizer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  margin-bottom: 30px;
+}
+ 
+.featured-organizer .organizador-name a {
+  font-size: 1.4em;
+  color: #802d97;
+  margin-bottom: 10px;
+}
+ 
+.featured-organizer p {
+  font-size: 1rem;
+  color: #666;
+}
+ 
+.featured-organizer .img-organizador {
+  width: 70%;
+  height: 300px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+ 
+.featured-organizer .img-organizador a {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+ 
+.imagen-principal {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+ 
+.featured-organizador .organizador-name {
+  width: 30%;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+ 
+ 
+/* Organizador Section */
+.organizadores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+ 
+.organizadores .organizador {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.organizadores .organizador:hover {
+  box-shadow: 4px 4px 8px #802d97;
+  transform: scale(1.05);
+}
+ 
+.organizadores .organizador .img-organizador {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.organizador .img-organizador a {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+ 
+.imagen-secundaria {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+ 
+ 
+.organizadores .organizador a {
+  font-size: 1.4em;
+  color: #802d97;
+  margin-bottom: 10px;
+}
+ 
+.organizadores .organizador p {
+  font-size: 1em;
+  color: #666;
+}
+ 
+.ver-mas {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #802d97;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+ 
+.ver-mas:hover {
+  background-color: #5c206d;
+}
+ 
+/* Header with Search */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+ 
+.header h2 {
+  font-size: 1.8em;
+  border-bottom: 2px solid #802d97;
+  padding-bottom: 10px;
+  color: #802d97;
+  font-weight: 400;
+  margin: 0;
+}
+ 
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+ 
+.search-box input {
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  outline: none;
+  width: 200px;
+}
+ 
+.search-box button {
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  background-color: #802d97;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.search-box button i {
+  font-size: 1em;
+}
+ 
+ 
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .organizadores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+ 
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ 
+  .navbar-links {
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+ 
+  .navbar-links a {
+    margin: 10px 0;
+  }
+ 
+  .featured-organizer {
+    padding: 20px;
+  }
+ 
+  .featured-organizer .img-organizador {
+    width: 150px;
+    height: 150px;
+    margin: 0 0 20px 0;
+  }
+ 
+  .featured-organizer .organizador-name {
+    font-size: 2em;
+    text-align: center;
+  }
+ 
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ 
+  .search-box {
+    width: 100%;
+    margin-top: 10px;
+  }
+ 
+  .search-box input {
+    width: 100%;
+  }
+ 
+  .organizadores {
+    grid-template-columns: 1fr;
+  }
+}
+ 
+@media (max-width: 480px) {
+  .navbar-brand a {
+    font-size: 1.5rem;
+  }
+ 
+  .navbar-links a {
+    font-size: 1rem;
+  }
+ 
+  .featured-organizer .organizador-name {
+    font-size: 1.8em;
+  }
+ 
+  .header h2 {
+    font-size: 1.5em;
+  }
+ 
+  .search-box {
+    margin-top: 5px;
+  }
+ 
+  .search-box button {
+    padding: 5px;
+  }
+}

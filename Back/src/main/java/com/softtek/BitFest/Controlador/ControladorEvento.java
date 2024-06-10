@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/eventos")
+@RequestMapping("/api/v1/auth/eventos")
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class ControladorEvento {
@@ -85,7 +85,6 @@ public class ControladorEvento {
         }
         return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
     }
-
     @GetMapping("/7primeros")
     public ResponseEntity<List<EventoInicioDTO>> findFirst7ByFechaRealizacionGreaterThanEqual() {
         List<Evento> eventosBBDD = eventoServicio.findFirst7ByFechaRealizacionGreaterThanEqual();
@@ -119,5 +118,17 @@ public class ControladorEvento {
         }
         return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<EventoInicioDTO>> buscarEventos(@RequestParam String query) {
+        List<Evento> eventosBBDD = eventoServicio.buscarEventos(query);
+        List<EventoInicioDTO> eventosDTO = new ArrayList<>();
+        for (Evento evento : eventosBBDD) {
+            EventoInicioDTO eDTO = new EventoInicioDTO();
+            eventosDTO.add(eDTO.castEventoDTO(evento));
+        }
+        return new ResponseEntity<>(eventosDTO, HttpStatus.OK);
+    }
+
 
 }

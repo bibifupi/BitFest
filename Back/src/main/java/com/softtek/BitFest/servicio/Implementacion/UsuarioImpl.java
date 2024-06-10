@@ -8,12 +8,14 @@ import com.softtek.BitFest.repositorio.IUsuarioRepositorio;
 
 import com.softtek.BitFest.servicio.IUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UsuarioImpl extends CRUDImpl<Usuario, Integer> implements IUsuarioServicio {
+public abstract class UsuarioImpl extends CRUDImpl<Usuario, Integer> implements IUsuarioServicio {
 
     @Autowired
     private IUsuarioRepositorio usuarioRepo;
@@ -33,4 +35,5 @@ public class UsuarioImpl extends CRUDImpl<Usuario, Integer> implements IUsuarioS
         return usuarioRepo.findByEmail(email);
     }
 
-}
+
+};

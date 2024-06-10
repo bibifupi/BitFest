@@ -21,12 +21,13 @@ public class OrganizadorImpl  extends CRUDImpl<Organizador, Integer> implements 
     }
 
     @Override
-    public List<Organizador> findFirst7ByNombre(String nombre) {
-        return organizadorRepo.findFirst7ByNombre(nombre);
+    public List<Organizador> findTop7OrganizersByName() {
+        return organizadorRepo.findTop7OrganizersByName();
     }
 
     @Override
     public List<Organizador> findByNombreLike(String nombre) {
-        return organizadorRepo.findByNombreLike(nombre);
+        String nombreBuscar = "%" + nombre + "%";
+        return organizadorRepo.findByNombreLike(nombreBuscar);
     }
 }

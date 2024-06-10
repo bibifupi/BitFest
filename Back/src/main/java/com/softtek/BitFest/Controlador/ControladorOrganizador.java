@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/organizadores")
+@RequestMapping("/api/v1/auth/organizadores")
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class ControladorOrganizador {
@@ -64,9 +64,9 @@ public class ControladorOrganizador {
         } else {
             throw new ExcepcionPersonalizadaNoEncontrado("Organizador con id  " + id +" no encontrado");
         }
-    } @GetMapping("/porOrganizador")
-    public ResponseEntity<List<OrganizadorDTO>> findFirst7ByNombre(@RequestParam(name="nombre") String nombre){
-        List<Organizador> organizadores = servicio.findFirst7ByNombre(nombre);
+    } @GetMapping("/7primerosOrganizador")
+    public ResponseEntity<List<OrganizadorDTO>> findTop7OrganizersByName(){
+        List<Organizador> organizadores = servicio.findTop7OrganizersByName();
         List<OrganizadorDTO> organizadoresDTO = new ArrayList<>();
         for (Organizador organizador : organizadores) {
             OrganizadorDTO dto = new OrganizadorDTO();

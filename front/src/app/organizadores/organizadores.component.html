@@ -1,0 +1,59 @@
+<div class="container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/inicio">BitFest</a>
+    </div>
+    <div class="navbar-links">
+      <a href="/inicio">Eventos</a>
+      <a href="/organizadores">Organizadores</a>
+      <a href="/perfil">Perfil</a>
+    </div>
+  </nav>
+ 
+  <main>
+ 
+    <div class="featured-organizer">
+      <div class="img-organizador">
+        <a href="/organizadoresinformacion/{{organizadoresTop7[0].idOrganizador}}">
+          <img class="imagen-principal" src="{{ organizadoresTop7[0].logotipo }}">
+        </a>
+      </div>
+      <div class="organizador-name">
+        <h3>
+          <a href="/organizadoresinformacion/{{organizadoresTop7[0].idOrganizador}}">
+            {{ organizadoresTop7[0].nombre | titlecase }}
+          </a>
+        </h3>
+        <p>{{ organizadoresTop7[0].descripcionCorta }}</p>
+      </div>
+    </div>
+ 
+    <div class="header">
+      <h2>Organizadores</h2>
+      <div class="search-box">
+        <input type="text" placeholder="Buscar organizadores" [formControl]="searchControl">
+      </div>
+    </div>
+ 
+    <div class="organizadores">
+      @for(elemento of organizadoresTop7.slice(1); track elemento.nombre){
+      <div class="organizador">
+        <div class="img-organizador">
+          <a href="/organizadoresinformacion/{{elemento.idOrganizador}}">
+            <img class="imagen-secundaria" src="{{ elemento.logotipo }}">
+          </a>
+        </div>
+        <h3>
+          <a href="/organizadoresinformacion/{{elemento.idOrganizador}}">
+            {{ elemento.nombre | titlecase }}
+          </a>
+        </h3>
+        <p>{{ elemento.descripcionCorta }}</p>
+      </div>
+      }
+    </div>
+    @if(flag){
+    <button class="ver-mas" (click)="listartodos()">Ver más</button>
+    }
+  </main>
+</div>

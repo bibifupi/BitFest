@@ -1,0 +1,22 @@
+<div class="container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/inicio">BitFest</a>
+    </div>
+    <div class="navbar-links">
+      <a href="/inicio">Eventos</a>
+      <a href="/organizadores">Organizadores</a>
+      <a href="/perfil">Perfil</a>
+    </div>
+  </nav>
+ 
+  <div class="organizador-informacion">
+    <div class="organizador-img">
+ 
+      <img src="{{ organizador?.logotipo }}" alt="{{ organizador?.nombre  || 'Organizador no encontrado'}}">
+    </div>
+    <div class="organizador-detalles">
+      <h2>{{ organizador?.nombre  | titlecase}}</h2>
+      <p>{{ organizador?.descripcionLarga }}</p>
+    </div>
+  </div>

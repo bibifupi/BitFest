@@ -3,7 +3,11 @@ package com.softtek.BitFest.Controlador;
 import com.softtek.BitFest.Excepciones.ExcepcionPersonalizadaNoEncontrado;
 import com.softtek.BitFest.dto.ComentarioDTO;
 import com.softtek.BitFest.modelo.Comentario;
+import com.softtek.BitFest.modelo.Evento;
+import com.softtek.BitFest.modelo.Usuario;
 import com.softtek.BitFest.servicio.IComentarioServicio;
+import com.softtek.BitFest.servicio.IEventoServicio;
+import com.softtek.BitFest.servicio.IUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/comentarios")
+@RequestMapping("/api/v1/auth/comentarios")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ControladorComentario {
     @Autowired
     private IComentarioServicio comentarioServicio;
+
+    @Autowired
+    private IEventoServicio eventoServicio;
+
+    @Autowired
+    private IUsuarioServicio usuarioServicio;
 
     @GetMapping
     public ResponseEntity<List<ComentarioDTO>> listarTodosLosComentarios() {
@@ -53,7 +63,21 @@ public class ControladorComentario {
 
     @PostMapping
     public ResponseEntity<ComentarioDTO> crearComentario(@Valid @RequestBody ComentarioDTO comentarioDTO) {
+        // Verificar si el evento y el usuario existen
+        Evento evento = eventoServicio.consultarUno(comentarioDTO.getIdEvento().getIdEvento());
+        Usuario usuario = usuarioServicio.consultarUno(comentarioDTO.getIdUsuario().getIdUsuario());
+
+        if (evento == null) {
+            throw new ExcepcionPersonalizadaNoEncontrado("Evento no encontrado con ID " + comentarioDTO.getIdEvento().getIdEvento());
+        }
+
+        if (usuario == null) {
+            throw new ExcepcionPersonalizadaNoEncontrado("Usuario no encontrado con ID " + comentarioDTO.getIdUsuario().getIdUsuario());
+        }
+
         Comentario comentario = comentarioDTO.castComentario();
+        comentario.setEvento(evento);
+        comentario.setIdUsuario(usuario);
         comentario = comentarioServicio.crear(comentario);
         return new ResponseEntity<>(ComentarioDTO.fromEntity(comentario), HttpStatus.CREATED);
     }

@@ -1,0 +1,47 @@
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="/inicio">BitFest</a>
+      </div>
+      <div class="navbar-links">
+        <a href="/inicio">Inicio</a>
+        <a href="/organizadores">Organizadores</a>
+        <a href="/perfil">Perfil</a>
+      </div>
+    </nav>
+
+    <main>
+      <div *ngIf="eventos.length > 0" class='featured-event' (click)="verEvento(eventos[0].idEvento)">
+        <div class='img-evento'>
+          <img [src]="eventos[0].imagen" alt="{{ eventos[0].titulo }}">
+        </div>
+        <div class='event-details'>
+          <div class='event-name'>{{ eventos[0].titulo }}</div>
+          <p>{{ eventos[0].descripcionCorta }}</p>
+          <p class='fecha-evento'>Fecha: {{ eventos[0].fechaRealizacion | date: 'dd/MM/yyyy' }}</p>
+          <p class='organizador'>Organizador: {{ eventos[0].organizador.nombre }}</p>
+        </div>
+      </div>
+      
+      <div class="header">
+        <h2>Próximos Eventos</h2>
+        <div class="search-box">
+          <input type="text" placeholder="Buscar eventos por título o organizador" [formControl]="searchControl">
+        </div>
+      </div>
+      <div class="eventos">
+        <div *ngFor="let evento of eventos.slice(1)" class="evento" (click)="verEvento(evento.idEvento)">
+          <div class="img-evento">
+            <img [src]="evento.imagen" alt="{{ evento.titulo }}">
+          </div>
+          <h3>{{ evento.titulo }}</h3>
+          <p>{{ evento.descripcionCorta }}</p>
+          <p class="fecha-evento">Fecha: {{ evento.fechaRealizacion | date: 'dd/MM/yyyy' }}</p>
+          <p class="organizador">Organizador: {{ evento.organizador.nombre }}</p> 
+        </div>
+      </div>
+      <button class="ver-mas" (click)="mostrarTodosEventos()">Ver más</button>
+    </main>
+  </div>

@@ -1,0 +1,125 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+ 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif; /* Cambio de fuente a Roboto */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Ajustado para centrar en el medio */
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Fondo gradiente */
+  overflow: hidden;
+  color: #e0f7fa;
+}
+ 
+/* Contenedor del formulario */
+.container {
+  background: rgba(255, 255, 255, 0.9); /* Fondo gris más claro */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mantener una sombra ligera para la card */
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  margin-left: auto; /* Ajuste para centrar horizontalmente */
+  margin-right: auto; /* Ajuste para centrar horizontalmente */
+}
+ 
+/* Título del formulario */
+h1 {
+  color: #572366;
+  margin-bottom: 25px; /* Reducido el margen inferior */
+  margin-top: 10px; /* Aumentado el margen superior */
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(131, 17, 224, 0.7);
+}
+ 
+/* Etiquetas de los campos del formulario */
+label {
+  color: #0e0606;
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: 600;
+  width: 100%;
+  font-size: 1rem;
+}
+ 
+/* Grupo de formulario */
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+ 
+/* Campos del formulario */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #802d97;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.5); /* Fondo blanco semi-transparente */
+  color: #0e0606;
+}
+ 
+.form-control:focus {
+  border-color: #5c206d;
+  outline: none;
+}
+ 
+/* Botón de enviar */
+.btn-primary {
+  background: linear-gradient(135deg, #802d97, #5c206d);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+ 
+.btn-primary:hover {
+  background: linear-gradient(135deg, #622474, #4c185b);
+  transform: translateY(-2px);
+}
+ 
+/* Enlace para continuar sin iniciar sesión */
+.link {
+  display: block;
+  margin-top: 30px; /* Aumentado el margen superior */
+  color: #802d97;
+  text-decoration: underline; /* Subrayado */
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+ 
+.link:hover {
+  color: #5c206d;
+}
+ 
+/* Mensaje de error */
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+ 
+.alert-danger {
+  background-color: rgba(255, 82, 82, 0.7);
+  color: #ffebee;
+  border: 1px solid #ef5350;
+}

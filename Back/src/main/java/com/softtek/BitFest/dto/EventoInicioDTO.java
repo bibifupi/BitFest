@@ -1,6 +1,7 @@
 package com.softtek.BitFest.dto;
 
 import com.softtek.BitFest.modelo.Evento;
+import com.softtek.BitFest.modelo.Organizador;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,10 +25,12 @@ public class EventoInicioDTO {
     @Size(min = 3, max = 100)
     private String descripcionCorta;
     @NotNull
-    private Date fechaRealizacion;
+    private LocalDate fechaRealizacion;
     @NotEmpty
     @Size(min = 3, max = 500)
     private String imagen;
+
+    private Organizador organizador;
 
     public Evento castEventoInicio() {
         Evento e1 = new Evento();
@@ -36,6 +39,7 @@ public class EventoInicioDTO {
         e1.setDescripcionCorta(this.descripcionCorta);
         e1.setFechaRealizacion(this.fechaRealizacion);
         e1.setImagen(this.imagen);
+        e1.setOrganizador(this.organizador);
         return e1;
     }
 
@@ -45,6 +49,7 @@ public class EventoInicioDTO {
         descripcionCorta=e.getDescripcionCorta();
         fechaRealizacion=e.getFechaRealizacion();
         imagen=e.getImagen();
+        organizador=e.getOrganizador();
         return this;
     }
 }

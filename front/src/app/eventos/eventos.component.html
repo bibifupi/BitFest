@@ -1,0 +1,41 @@
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="/inicio">BitFest</a>
+      </div>
+      <div class="navbar-links">
+        <a href="/inicio">Inicio</a>
+        <a href="/organizadores">Organizadores</a>
+        <a href="/perfil">Perfil</a>
+      </div>
+    </nav>
+
+    <div class="evento-detalle-container">
+      <div class="evento-imagen">
+        <img [src]="evento?.imagen" alt="{{ evento?.titulo }}">
+      </div>
+      <div class="evento-info">
+        <h2>{{ evento?.titulo }}</h2>
+        <p>{{ evento?.descripcionLarga }}</p>
+        <div>
+          <span>Fecha de Realización: {{ evento?.fechaRealizacion | date: 'longDate' }}</span>
+          <span>Fecha de Actualización: {{ evento?.fechaActualizacion | date: 'longDate' }}</span>
+        </div>
+        <div>Categorías: {{ evento?.categoria }}</div>
+        <div>Organizado por: {{ evento?.organizador?.nombre }}</div>
+      </div>
+      <div class="comentarios-container">
+        <h3>Comentarios</h3>
+        <div *ngFor="let comentario of comentarios">
+          <p><strong>Usuario anonimo:</strong> {{ comentario.texto }}</p>
+          <small>{{ comentario.fecha | date:'medium' }}</small>
+        </div>
+        <div class="input-group">
+          <input type="text" [(ngModel)]="nuevoComentario" class="input-comentario" placeholder="Escribe un comentario...">
+          <button class="btn-comentar" (click)="enviarComentario()" [disabled]="!nuevoComentario.trim()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
